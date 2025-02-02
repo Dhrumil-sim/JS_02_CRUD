@@ -1,0 +1,94 @@
+/* Main styles */
+.main {
+    max-width: 1200px;
+    margin: 20px auto;
+    padding: 20px;
+}
+
+/* Header styles */
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    border-bottom: 2px solid var(--border-color-light);
+    padding-bottom: 10px;
+}
+
+/* Search Bar Styles */
+.search-bar {
+    position: relative;
+    width: 300px;
+}
+
+.search-bar input {
+    padding: 12px 12px 12px 45px; /* Added padding to make space for the icon */
+    font-size: 14px;
+    width: 100%;
+    border-radius: 8px;
+    border: 1px solid black;
+    outline: none;
+}
+
+/* Highlight when input is active (focused) */
+.search-bar input:focus {
+    box-shadow: 0 0 5px #0056b3; /* Add a subtle glow effect */
+}
+
+/* Search Bar Icon */
+.search-bar .search-icon {
+    position: absolute;
+    left: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 18px;
+    color: var(--border-color-light);
+}
+
+/* Sorting and Filtering Dropdown Styles */
+.sorting-filtering {
+    display: flex;
+    gap: 15px;
+}
+
+.sorting-filtering .dropdown {
+    position: relative;
+    border: 1px solid black;
+    border-radius: 7px;
+    padding-right: 7px;
+}
+
+.sorting-filtering .dropdown:hover{
+    box-shadow: 0 0 5px #0056b3;
+}
+
+
+.sorting-filtering select {
+    padding: 12px;
+    font-size: 14px;
+    border-radius: 8px;
+    border: 1px solid var(--border-color-light);
+    background-color: var(--background-color-light);
+    outline: none;
+    cursor: pointer;
+    transition: border 0.3s ease;
+}
+
+.sorting-filtering select:hover {
+    border: 1px solid var(--primary-color-light);
+}
+
+/* Icons for Dropdowns */
+.sorting-filtering .sort-icon,
+.sorting-filtering .range-icon {
+    position: absolute;
+    left: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 18px;
+    color: var(--border-color-light);
+}
+
+.sorting-filtering .dropdown select {
+    padding-left: 30px; /* Added padding to accommodate the icon */
+}

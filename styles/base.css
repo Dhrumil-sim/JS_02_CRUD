@@ -1,0 +1,62 @@
+root {
+    --background-color-light: #ffffff;
+    --text-color-light: #333333;
+    --primary-color-light: #6C63FF; /* Soft purple */
+    --secondary-color-light: #FF6F61; /* Coral */
+    --border-color-light: #E0E0E0;
+    --hover-color-light: #F0F0F0;
+    --button-bg-light: #6C63FF;
+    --button-text-light: #ffffff;
+    --card-bg-light: #F8F9FA;
+    --link-color-light: #6C63FF; /* Soft purple */
+    --background-color-dark: #121212;
+    --text-color-dark: #E0E0E0;
+    --primary-color-dark: #1E90FF;
+    --secondary-color-dark: #575757;
+    --border-color-dark: #333333;
+    --hover-color-dark: #444444;
+    --button-bg-dark: #1E90FF;
+    --button-text-dark: #ffffff;
+    --card-bg-dark: #2B2B2B;
+    --link-color-dark: #1E90FF;
+    --menu-bg: rgba(255, 255, 255, 0.9);
+    --menu-border: rgba(0, 0, 0, 0.1);
+    --menu-hover: #B19CD7;
+    --menu-shadow: rgba(0, 0, 0, 0.15);
+    --text-color: #333;
+}
+/* Basic scrollbar styles */
+::-webkit-scrollbar {
+    width: 8px;  /* Set the width of the scrollbar */
+    height: 8px; /* Set the height of the scrollbar for horizontal scroll */
+}
+
+/* Track (background of the scrollbar) */
+::-webkit-scrollbar-track {
+    background: transparent; /* Make the track transparent */
+    border-radius: 4px; /* Optional: rounded corners */
+}
+
+/* Handle (the draggable part of the scrollbar) */
+::-webkit-scrollbar-thumb {
+    background: rgba(0, 0, 0, 0.2); /* Set the color of the handle */
+    border-radius: 4px; /* Optional: rounded corners */
+    border: 2px solid transparent; /* Optional: add a slight border */
+    background-clip: content-box; /* Optional: keeps the background inside the thumb */
+}
+
+/* Handle hover state */
+::-webkit-scrollbar-thumb:hover {
+    background: rgba(0, 0, 0, 0.5); /* Darken the thumb color on hover */
+}
+
+/* Handle active state */
+::-webkit-scrollbar-thumb:active {
+    background: rgba(0, 0, 0, 0.7); /* Darken the thumb when actively scrolling */
+}
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: var(--background-color-light);
+    color: var(--text-color-light);
+    transition: background-color 0.3s, color 0.3s;
+}
