@@ -1,17 +1,36 @@
 import { getProducts} from "../../modal/productModal.js";
 import { groupProductsByCategory } from "../../controllers/utils/renderUtils/groupProductsByCategories.js";
 import { createProductModal } from "../addProductForm.js";
-/// Function to create a table for a specific category
+
+
+// Sample state structure that stores pagination settings for each category
+var state = {
+    'categories': groupProductsByCategory(getProducts()), // Group products by categories
+    'paginationSettings': {},  // Store the pagination settings for each category
+    'maxRowsPerPage': 5  // Maximum rows per page (this can be updated in the future)
+};
+
+// Initialize pagination settings for each category
+function initializePaginationSettings(state) {
+    for (const category in state.categories) {
+        state.paginationSettings[category] = {
+            'page': 1,  // Starting on the first page
+            'rows': state.maxRowsPerPage,  // Set the rows per page dynamically from maxRowsPerPage
+        };
+    }
+}
+
+// Function to create a table for a specific category
 const createTable = (category, products) => {
     // Create a container for the category
     const categoryContainer = document.createElement("div");
     categoryContainer.classList.add("category-container");
-    
+
     // Create a category heading
     const categoryHeading = document.createElement("h3");
     categoryHeading.innerText = category;
-    categoryHeading.style.marginLeft='50%';
-    categoryHeading.style.marginRight='50%';
+    categoryHeading.style.marginLeft = '50%';
+    categoryHeading.style.marginRight = '50%';
 
     categoryContainer.appendChild(categoryHeading);
 
@@ -33,18 +52,109 @@ const createTable = (category, products) => {
             <tbody id="product-list-${category}"></tbody>
         </table>
     `;
-    
+
     // Append the table to the category container
     categoryContainer.appendChild(tableContainer);
-    
+
+    // Create pagination controls
+    const paginationContainer = document.createElement('div');
+    paginationContainer.classList.add("pagination-controls");
+    categoryContainer.appendChild(paginationContainer);
+
     // Add the category container to the main body
     document.body.appendChild(categoryContainer);
 
-    // Add products to the category table
-    addProductsForCategory(category, products);
+    // Initialize pagination for the category
+    initializePaginationSettings(state);
 
-  
+    // Get the current page from the state
+    const currentPage = state.paginationSettings[category].page;
+    const rowsPerPage = state.paginationSettings[category].rows;
+
+    // Paginate the products for the current page
+    const paginatedData = pagination(products, currentPage, rowsPerPage);
+
+    console.log(paginatedData);
+    // Add products to the category table
+    addProductsForCategory(category, paginatedData.querySet);
+
+    // Add pagination buttons
+    createPaginationButtons(category, paginatedData.pages);
 };
+
+// Function to create pagination buttons
+const createPaginationButtons = (category, totalPages) => {
+    const paginationContainer = document.querySelector(`#product-list-${category}`).closest('.category-container').querySelector('.pagination-controls');
+    paginationContainer.innerHTML = '';  // Clear any existing buttons
+
+    // Create previous button
+    const prevButton = document.createElement("button");
+    prevButton.innerText = "Previous";
+    prevButton.disabled = state.paginationSettings[category].page === 1; // Disable if already on first page
+    prevButton.addEventListener('click', () => {
+        changePage(category, state.paginationSettings[category].page - 1);
+    });
+
+    // Create next button
+    const nextButton = document.createElement("button");
+    nextButton.innerText = "Next";
+    nextButton.disabled = state.paginationSettings[category].page === totalPages; // Disable if on last page
+    nextButton.addEventListener('click', () => {
+        changePage(category, state.paginationSettings[category].page + 1);
+    });
+
+    // Add previous and next buttons to the pagination container
+    paginationContainer.appendChild(prevButton);
+
+    // Create page number buttons
+    for (let i = 1; i <= totalPages; i++) {
+        const pageButton = document.createElement("button");
+        pageButton.innerText = i;
+        if (i === state.paginationSettings[category].page) {
+            pageButton.classList.add("active");
+        }
+        pageButton.addEventListener('click', () => {
+            changePage(category, i);
+        });
+        paginationContainer.appendChild(pageButton);
+    }
+
+    paginationContainer.appendChild(nextButton);
+};
+
+// Function to change the page and update the pagination settings
+function changePage(category, newPage) {
+    if (state.paginationSettings[category]) {
+        // Update page for the given category
+        state.paginationSettings[category].page = newPage;
+
+        // Get the products for this category
+        const categoryProducts = state.categories[category];
+
+        // Get the pagination settings for the category
+        const { rows } = state.paginationSettings[category]; // Rows per page for the category
+
+        // Paginate the data for the given page
+        const paginatedData = pagination(categoryProducts, newPage, rows);
+
+        // Log the paginated data
+        console.log(`Category: ${category}, Page: ${newPage}`);
+        console.log('Paginated Data:', paginatedData);
+
+        // Clear the previous products and add new ones for the selected page
+        const productList = document.getElementById(`product-list-${category}`);
+        productList.innerHTML = ''; // Clear existing products
+
+        // Add the new products for the current page
+        addProductsForCategory(category, paginatedData.querySet);
+
+        // Update the pagination buttons
+        createPaginationButtons(category, paginatedData.pages);
+    }
+}
+
+// Log the result of calling changePage for 'Plant' category, page 2
+console.log(changePage('Plant', 2));
 
 // Function to add products to a category-specific table
 const addProductsForCategory = (category, products) => {
@@ -62,6 +172,37 @@ const addProductsForCategory = (category, products) => {
         addToggleDetailsEvent(row, detailsRow);
         addEditButtonEvent(row, product.id);
     });
+};
+
+// Pagination function to handle pagination for a single category
+function pagination(querySet, page, rows) {
+    var trimStart = (page - 1) * rows;
+    var trimEnd = trimStart + rows;
+    var trimmedData = querySet.slice(trimStart, trimEnd);
+    var pages = Math.ceil(querySet.length / rows);  // Total number of pages
+    return {
+        'querySet': trimmedData,
+        'pages': pages
+    };
+}
+
+// Function to create a product row (for displaying in table)
+const createProductRow = (product, index) => {
+    const row = document.createElement("tr");
+    row.classList.add("product-row");
+    row.innerHTML = `
+        <td>${product.id}</td> <!-- Updated to use index -->
+        <td><img src="${product.logo}" alt="Product Logo" class="product-img" ></td>
+        <td>${product.name}</td>
+        <td>${product.description}</td>
+        <td>${product.price}</td>
+        <td>
+            <button class="btn edit-btn" data-product-id="${product.id}">Edit</button>
+            <button class="btn delete-btn">Delete</button>
+            <span class="toggle-details-btn">▼</span>
+        </td>
+    `;
+    return row;
 };
 
 
@@ -86,24 +227,6 @@ export const addProducts = () => {
     });
 };
 
-// Function to create a product row (for displaying in table)
-const createProductRow = (product, index) => {
-    const row = document.createElement("tr");
-    row.classList.add("product-row");
-    row.innerHTML = `
-        <td>${product.id}</td> <!-- Updated to use index -->
-        <td><img src="${product.logo}" alt="Product Logo" class="product-img" ></td>
-        <td>${product.name}</td>
-        <td>${product.description}</td>
-        <td>${product.price}</td>
-        <td>
-            <button class="btn edit-btn" data-product-id="${product.id}">Edit</button>
-            <button class="btn delete-btn">Delete</button>
-            <span class="toggle-details-btn">▼</span>
-        </td>
-    `;
-    return row;
-};
 
 
 // Function to create the expanded product details row

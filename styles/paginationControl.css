@@ -1,0 +1,72 @@
+/* Pagination Container */
+.pagination-controls {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+}
+
+.pagination-controls button {
+    padding: 8px 16px;
+    margin: 0 5px;
+    background-color: transparent;
+    color: #333;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 14px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+/* Hover effect */
+.pagination-controls button:hover {
+    background-color: #f5f5f5;
+    border-color: #999;
+}
+
+/* Disabled Button */
+.pagination-controls button:disabled {
+    background-color: #f0f0f0;
+    color: #ccc;
+    border-color: #ddd;
+    cursor: not-allowed;
+}
+
+/* Active Page */
+.pagination-controls button.active {
+    background-color: #007bff;
+    color: white;
+    border-color: #007bff;
+}
+
+/* Hover effect for active page */
+.pagination-controls button.active:hover {
+    background-color: #0056b3;
+    border-color: #0056b3;
+}
+
+/* First and last buttons (Previous/Next) */
+.pagination-controls button:first-child {
+    border-radius: 4px 0 0 4px;
+}
+
+.pagination-controls button:last-child {
+    border-radius: 0 4px 4px 0;
+}
+
+/* Compact page number buttons */
+.pagination-controls button:not(.active) {
+    width: 32px;
+    height: 32px;
+    line-height: 32px;
+    text-align: center;
+    padding: 0;
+    font-size: 14px;
+    border-radius: 50%;
+}
+
+/* Remove border radius for first and last page buttons */
+.pagination-controls button:first-child:not(.active),
+.pagination-controls button:last-child:not(.active) {
+    border-radius: 4px;
+}
