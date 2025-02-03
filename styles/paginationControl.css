@@ -73,4 +73,5 @@
 .pagination-controls button:first-child:not(.active),
 .pagination-controls button:last-child:not(.active) {
     border-radius: 4px;
+    width: 100px;
 }
