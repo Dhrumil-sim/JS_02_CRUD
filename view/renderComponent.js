@@ -17,5 +17,16 @@ if (addButton) {
         // Show an alert when the "Add" button is clicked
         createProductModal();
     });
-} 
-});
+}
+
+const homeButton = document.getElementById('home-button');
+
+if(homeButton)
+{
+      homeButton.addEventListener('click',()=>{
+        setTimeout(() => {
+            window.location.reload();
+          }, 200);
+      });
+}});
+
