@@ -235,6 +235,21 @@ td {
 .delete-btn:hover {
     background-color: #c82333;
 }
+/* Fade out animation */
+@keyframes fadeOut {
+    0% {
+        opacity: 1;
+        transform: scale(1);
+    }
+    100% {
+        opacity: 0;
+        transform: scale(0.9);
+    }
+}
+
+.fade-out {
+    animation: fadeOut 0.5s forwards; /* Apply the fade-out animation */
+}
 
 /* Responsive design */
 @media (max-width: 768px) {

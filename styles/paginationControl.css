@@ -3,7 +3,11 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    margin-top: 20px;
+    margin-top: 10px;
+}
+
+.pagination-controls:last-of-type{
+    margin-bottom: 100px;
 }
 
 .pagination-controls button {

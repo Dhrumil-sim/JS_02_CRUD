@@ -70,6 +70,9 @@ export const deleteProduct = (productId) => {
     const products = getProducts();
     const updatedProducts = products.filter(product => product.id !== productId);
     localStorage.setItem('products', JSON.stringify(updatedProducts)); // Save updated list to localStorage
+    setTimeout(() => {
+        window.location.reload();
+      }, 200);
 };
 
 /**

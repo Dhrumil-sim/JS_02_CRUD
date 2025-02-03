@@ -1,4 +1,4 @@
-import { getProducts} from "../../modal/productModal.js";
+import { getProducts,deleteProduct} from "../../modal/productModal.js";
 import { groupProductsByCategory } from "../../controllers/utils/renderUtils/groupProductsByCategories.js";
 import { createProductModal } from "../addProductForm.js";
 
@@ -171,6 +171,7 @@ const addProductsForCategory = (category, products) => {
         // Add event listeners
         addToggleDetailsEvent(row, detailsRow);
         addEditButtonEvent(row, product.id);
+        addDeleteButtonEvent(row,product.id);
     });
 };
 
@@ -198,7 +199,7 @@ const createProductRow = (product, index) => {
         <td>${product.price}</td>
         <td>
             <button class="btn edit-btn" data-product-id="${product.id}">Edit</button>
-            <button class="btn delete-btn">Delete</button>
+            <button class="btn delete-btn" data-product-id="${product.id}">Delete</button>
             <span class="toggle-details-btn">▼</span>
         </td>
     `;
@@ -284,7 +285,38 @@ const addEditButtonEvent = (row, productId) => {
         // Get the data-product-id attribute from the button clicked
         const productId = event.target.getAttribute('data-product-id');
         
+
         createProductModal(productId)
        
+    });
+};
+
+const addDeleteButtonEvent = (row, productId) => {
+    const deleteButton = row.querySelector('.delete-btn');
+    
+    deleteButton.addEventListener('click', (event) => {
+        // Get the product ID from the data attribute
+        const productId = event.target.getAttribute('data-product-id');
+        
+        // Show confirmation dialog to the user
+        const isConfirmed = window.confirm("Are you sure you want to delete this product?");
+        
+        if (isConfirmed) {
+
+            deleteProduct(productId);
+            row.classList.add('fade-out');
+
+            row.addEventListener('animationed',()=>{
+
+                console.log("Product to delete: ", productId);
+            
+                // Call the deleteProduct function if confirmed
+               
+                row.remove();
+            });
+           
+        } else {
+            console.log("Product deletion canceled.");
+        }
     });
 };
