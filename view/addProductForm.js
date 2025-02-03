@@ -3,38 +3,37 @@ import { getProductById, saveProduct, updateProduct } from '../modal/productModa
 
 // Function to create the Add/Edit Product modal
 export const createProductModal = (productId = null) => {
-    if (document.getElementById("product-modal")) return; // Prevent multiple modals
-
     const modal = document.createElement("div");
     modal.classList.add("modal");
     modal.id = "product-modal";
+    
     modal.innerHTML = generateModalContent(productId);
 
+    // Append the modal to the body
     document.body.appendChild(modal);
-    modal.style.display = "none";
 
-    // Show modal when "add-button" is clicked
-    document.getElementById("add-button").addEventListener("click", () => {
-        modal.style.display = "block";
-    });
+    // Show the modal
+    modal.style.display = "block";
 
-    // Close modal when "close-btn" or outside the modal is clicked
+    // Close modal functionality
     modal.querySelector(".close-btn").addEventListener("click", () => {
         modal.style.display = "none";
+        document.body.removeChild(modal); // Remove modal after close
     });
 
     window.addEventListener("click", (event) => {
         if (event.target === modal) {
             modal.style.display = "none";
+            document.body.removeChild(modal);
         }
     });
 
-    // If productId is provided, populate the form with existing product data
+    // If editing, populate the form
     if (productId) {
         populateForm(productId);
     }
 
-    // Handle form submission with validation
+    // Handle form submission
     handleFormSubmission(productId);
 };
 
@@ -98,7 +97,6 @@ const populateForm = (productId) => {
     }
 };
 
-// Handle form submission and validation
 const handleFormSubmission = (productId) => {
     document.getElementById("product-form").addEventListener("submit", (e) => {
         e.preventDefault();
@@ -108,6 +106,9 @@ const handleFormSubmission = (productId) => {
         if (valid) {
             const productData = gatherProductData(productId);
 
+            // After submitting, close the modal and remove it from the DOM
+            const modal = document.getElementById("product-modal");
+
             if (productId) {
                 updateProduct(productId, productData);
                 console.log("Product Updated:", productData);
@@ -115,11 +116,16 @@ const handleFormSubmission = (productId) => {
                 const productAdd = saveProduct(productData);
                 console.log("Product Added:", productAdd);
             }
+
+            // Close the modal
+            modal.style.display = "none";
+            document.body.removeChild(modal); // Remove the modal from the DOM after submission
         } else {
             console.log("Validation failed. Check the input fields.");
         }
     });
 };
+
 
 // Gather form data into an object
 const gatherProductData = (productId) => {

@@ -86,5 +86,8 @@ export const updateProduct = (productId, updatedData) => {
         const updatedProduct = { ...product, ...updatedData, modifiedAt: new Date().toISOString() };
         products[productIndex] = updatedProduct;
         localStorage.setItem('products', JSON.stringify(products)); // Save updated list to localStorage
+        setTimeout(() => {
+            window.location.reload();
+          }, 200);
     }
 };

@@ -1,4 +1,4 @@
-/* Table styling */
+
 .table {
     background-color: var(--card-bg-light);
     border-radius: 8px;
@@ -11,7 +11,14 @@ table {
     border-collapse: collapse;
     table-layout: fixed;
 }
-
+.category-container {
+    margin-bottom: 20px;
+}
+tbody {
+    max-height: 300px; /* You can adjust the height as needed */
+    overflow-y: auto; /* Enable vertical scrolling */
+    overflow-x: hidden; /* Prevent horizontal scrolling */
+}
 th, td {
     padding: 12px 15px;
     text-align: left;
@@ -25,7 +32,7 @@ tr{
    border-bottom: #ccc; 
 }
 th {
-    background-color: var(--primary-color-light);
+    background-color: whitesmoke;
     color: var(--button-text-light);
     font-weight: bold;
     border-bottom: 2px solid var(--border-color-light);
@@ -37,6 +44,7 @@ td {
     background-color: var(--card-bg-light);
     border-bottom: 1px solid var(--border-color-light);
 }
+
 
 .product-img {
     width: 50px;

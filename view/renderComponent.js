@@ -1,7 +1,7 @@
-import { createProductModal} from "./addProductform.js";
+import { createProductModal} from "./addProductForm.js";
 import { getProducts, getProductById } from "../modal/productModal.js";
+import { groupProductsByCategory } from "../controllers/utils/renderUtils/groupProductsByCategories.js";
 
-// app.js
 
 // Function to create the bottom menu
 const createBottomMenu = () => {
@@ -10,7 +10,7 @@ const createBottomMenu = () => {
     bottomMenu.innerHTML = `
         <div class="menu-items">
             <a href="#home"><i class="fas fa-house"></i><span>Home</span></a>
-            <a href="#add" id="add-button"><i class="fas fa-plus" ></i><span>Add</span></a>
+            <a id="add-button"><i class="fas fa-plus" ></i><span>Add</span></a>
         </div>
     `;
     document.body.appendChild(bottomMenu);
@@ -49,12 +49,26 @@ const createHeader = () => {
     document.body.appendChild(header);
 };
 
-// Function to create the product table
-const createTable = () => {
+const PAGE_SIZE = 5;
+
+/// Function to create a table for a specific category
+const createTable = (category, products) => {
+    // Create a container for the category
+    const categoryContainer = document.createElement("div");
+    categoryContainer.classList.add("category-container");
+    
+    // Create a category heading
+    const categoryHeading = document.createElement("h3");
+    categoryHeading.innerText = category;
+    categoryHeading.style.marginLeft='50%';
+    categoryHeading.style.marginRight='50%';
+
+    categoryContainer.appendChild(categoryHeading);
+
+    // Create the table structure for this category
     const tableContainer = document.createElement("div");
     tableContainer.classList.add("table");
     tableContainer.innerHTML = `
-        <h3>Category</h3>
         <table>
             <thead>
                 <tr>
@@ -66,11 +80,40 @@ const createTable = () => {
                     <th>Action</th>
                 </tr>
             </thead>
-            <tbody id="product-list"></tbody>
+            <tbody id="product-list-${category}"></tbody>
         </table>
     `;
-    document.body.appendChild(tableContainer);
+    
+    // Append the table to the category container
+    categoryContainer.appendChild(tableContainer);
+    
+    // Add the category container to the main body
+    document.body.appendChild(categoryContainer);
+
+    // Add products to the category table
+    addProductsForCategory(category, products);
+
+  
 };
+
+// Function to add products to a category-specific table
+const addProductsForCategory = (category, products) => {
+    const productList = document.getElementById(`product-list-${category}`);
+
+    // Add each product to the table
+    products.forEach((product, index) => {
+        const row = createProductRow(product, index + 1);
+        const detailsRow = createProductDetailsRow(product);
+        
+        productList.appendChild(row);
+        productList.appendChild(detailsRow);
+
+        // Add event listeners
+        addToggleDetailsEvent(row, detailsRow);
+        addEditButtonEvent(row, product.id);
+    });
+};
+
 
 // Function to add products to the list
 export const addProducts = () => {
@@ -85,29 +128,20 @@ export const addProducts = () => {
         return;
     }
 
-    // Map over the products and create the HTML for each product
-    products.forEach((product) => {
-        const row = createProductRow(product); // Create row for each product
-        const detailsRow = createProductDetailsRow(product); // Create details row for each product
-        
-        // Append both rows to the table
-        productList.appendChild(row);
-        productList.appendChild(detailsRow);
+    const categorizedProducts = groupProductsByCategory(products);
 
-        // Add event listener for toggling product details
-        addToggleDetailsEvent(row, detailsRow);
-
-        // Add event listener for the Edit button
-        addEditButtonEvent(row, product.id);
+    // Loop over categories and create tables
+    Object.keys(categorizedProducts).forEach(category => {
+        createTable(category, categorizedProducts[category]);
     });
 };
 
 // Function to create a product row (for displaying in table)
-const createProductRow = (product) => {
+const createProductRow = (product, index) => {
     const row = document.createElement("tr");
     row.classList.add("product-row");
     row.innerHTML = `
-        <td>${product.id}</td>
+        <td>${product.id}</td> <!-- Updated to use index -->
         <td><img src="${product.logo}" alt="Product Logo" class="product-img" ></td>
         <td>${product.name}</td>
         <td>${product.description}</td>
@@ -120,6 +154,7 @@ const createProductRow = (product) => {
     `;
     return row;
 };
+
 
 // Function to create the expanded product details row
 const createProductDetailsRow = (product) => {
@@ -164,30 +199,34 @@ const addToggleDetailsEvent = (row, detailsRow) => {
     });
 };
 
+
+
+
 // Function to add event listener to Edit button
 const addEditButtonEvent = (row, productId) => {
     const editButton = row.querySelector('.edit-btn');
     
     // Add click event to the Edit button
     editButton.addEventListener('click', (event) => {
-        // Get the data-product-id attribute
+        // Get the data-product-id attribute from the button clicked
         const productId = event.target.getAttribute('data-product-id');
         
-        // Print "Hello" and the productId
-        console.log("Hello");
-        console.log("Product ID:", productId);
-        const modal = document.getElementById("product-modal");
         createProductModal(productId);
-        modal.style.display = "block";
+       
     });
 };
+
 
 // Initialize the page
 document.addEventListener("DOMContentLoaded", () => {
     createBottomMenu();
     createHeader();
-    createTable();
     addProducts();
-    createProductModal(); // Initialize add product modal
+    
+   // Add event listener to the "Add Product" button
+document.getElementById("add-button").addEventListener("click", () => {
+    createProductModal(); // This will open the modal only when the button is clicked
+});
 
+    
 });
