@@ -1,5 +1,5 @@
 // Function to create the header
-export const createHeader = () => {
+export const createHeader = (products, updateTable) => {
     const header = document.createElement("div");
     header.classList.add("header");
     header.innerHTML = `
@@ -29,4 +29,32 @@ export const createHeader = () => {
         </div>
     `;
     document.body.appendChild(header);
+
+    // Get the search input element
+    const searchInput = document.getElementById('search-input');
+
+    // Create the debounced search function
+    const debouncedSearch = debounce((event) => {
+        const searchQuery = event.target.value;
+        handleSearch(searchQuery); // Call handleSearch and only pass the query
+    }, 300); // Delay of 300ms
+
+    // Add event listener to the search input for real-time search
+    searchInput.addEventListener('input', debouncedSearch);
+
+    // Add other event listeners for price sort and range filtering as before
+};
+
+// Debounce function to limit the rate at which a function can fire
+function debounce(func, wait) {
+    let timeout;
+    return function() {
+        clearTimeout(timeout);
+        timeout = setTimeout(() => func.apply(this, arguments), wait);
+    };
+}
+
+// Function to handle searching of products (just log the search query)
+const handleSearch = (query) => {
+    console.log("Search Query:", query); // Log only the search query
 };
