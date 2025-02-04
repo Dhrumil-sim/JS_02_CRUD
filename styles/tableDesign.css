@@ -307,16 +307,24 @@ td {
 }
 
 
-/* Responsive Table on Small Screens */
 @media (max-width: 768px) {
-    table {
-        font-size: 12px; /* Smaller font size */
+    .header {
+        flex-direction: column;
+        align-items: flex-start;
     }
-    
+
+    .search-bar input, .sorting-filtering select {
+        width: 100%;
+        margin-bottom: 10px;
+    }
+
+    table {
+        font-size: 12px;
+    }
+
     th, td {
-        padding: 8px 10px; /* Smaller padding */
+        padding: 8px 10px;
         word-wrap: break-word;
-        white-space: normal; /* Allow wrapping of text */
     }
 
     .product-img {
@@ -324,76 +332,16 @@ td {
         height: 40px;
     }
 
-    .table {
-        padding: 15px;
-    }
-
-    /* Enable horizontal scroll */
-    .category-container {
-        margin-bottom: 20px;
-        overflow-x: auto;
-    }
-
-    /* Adjust the header */
-    th {
-        font-size: 13px;
-        padding-top: 12px;
-        padding-bottom: 12px;
-    }
-
-    /* Mobile-specific: Stack rows vertically (turn table into a list) */
-    tbody {
-        display: block;
-        max-height: 300px;
-        overflow-y: auto;
-    }
-
-    tr {
-        display: block;
-        width: 100%;
-    }
-
-    td {
-        display: block;
-        width: 100%;
-        text-align: right;
-        padding: 8px;
-        border-bottom: 1px solid var(--border-color-light);
-    }
-
-    /* Label the fields for clarity on small screens */
-    td::before {
-        content: attr(data-label);
-        font-weight: bold;
-        display: inline-block;
-        margin-right: 10px;
-        text-align: left;
-    }
-
-    /* Style buttons for small devices */
     .btn {
         padding: 6px 12px;
     }
 }
 
-/* Additional Adjustments for Small Devices (Mobile) */
 @media (max-width: 480px) {
+    .table {
+        padding: 15px;
+    }
     .product-expanded-content {
-        flex-direction: column; /* Stack content vertically */
-    }
-    
-    /* Adjust image sizes and ensure smooth mobile layout */
-    .product-img {
-        width: 30px;
-        height: 30px;
-    }
-    
-    .scroll-btn {
-        padding: 8px;
-        font-size: 14px;
-    }
-
-    .btn {
-        font-size: 12px;
+        flex-direction: column;
     }
 }
