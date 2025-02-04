@@ -37,6 +37,7 @@ td:hover {
 
 tr {
     border-bottom: 1px solid var(--border-color-light);
+    overflow-y: auto;
 }
 
 th {
