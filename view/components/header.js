@@ -11,6 +11,7 @@ export const createHeader = (products, updateTable) => {
             <input type="text" placeholder="Search Products" id="search-input">
             <span class="search-icon">🔍</span>
         </div>
+
         <div class="sorting-filtering">
             <div class="dropdown">
                 <span class="sort-icon">⬇</span>
@@ -98,6 +99,7 @@ function handlePriceSort(sortOption,products)
     else 
     {
         sortedProducts = products;
+        renderSearchResults("Sorted by price",sortedProducts,false);
     }
-    renderSearchResults("Sorted by price",sortedProducts);
+    renderSearchResults("Sorted by price",sortedProducts,true);
 }

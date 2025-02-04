@@ -188,20 +188,56 @@ function pagination(querySet, page, rows) {
 const createProductRow = (product, index) => {
     const row = document.createElement("tr");
     row.classList.add("product-row");
-    row.innerHTML = `
-        <td>${product.id}</td> <!-- Updated to use index -->
-        <td><img src="${product.logo}" alt="Product Logo" class="product-img" ></td>
-        <td>${product.name}</td>
-        <td>${product.description}</td>
-        <td>${product.price}</td>
-        <td>
-            <button class="btn edit-btn" data-product-id="${product.id}">Edit</button>
-            <button class="btn delete-btn" data-product-id="${product.id}">Delete</button>
-            <span class="toggle-details-btn">▼</span>
-        </td>
+
+    // Placeholder image URL (50x50 pixels)
+    const placeholderImage = "https://placehold.co/50x50";
+
+    // Create an image element
+    const image = document.createElement("img");
+    image.src = product.logo || placeholderImage;  // Use the placeholder image if logo is not provided
+    image.alt = "Product Logo";
+    image.classList.add("product-img");
+
+    // Handle image error (if the image fails to load)
+    image.onerror = () => {
+        image.src = placeholderImage;  // Set the placeholder image if there's an error
+    };
+
+    // Create the product row content
+    const idCell = document.createElement("td");
+    idCell.textContent = product.id;
+
+    const imageCell = document.createElement("td");
+    imageCell.appendChild(image);  // Append the image element
+
+    const nameCell = document.createElement("td");
+    nameCell.textContent = product.name;
+
+    const descriptionCell = document.createElement("td");
+    descriptionCell.textContent = product.description;
+
+    const priceCell = document.createElement("td");
+    priceCell.textContent = product.price;
+
+    const actionCell = document.createElement("td");
+    actionCell.innerHTML = `
+        <button class="btn edit-btn" data-product-id="${product.id}">Edit</button>
+        <button class="btn delete-btn" data-product-id="${product.id}">Delete</button>
+        <span class="toggle-details-btn">▼</span>
     `;
+
+    // Append all the cells to the row
+    row.appendChild(idCell);
+    row.appendChild(imageCell);
+    row.appendChild(nameCell);
+    row.appendChild(descriptionCell);
+    row.appendChild(priceCell);
+    row.appendChild(actionCell);
+
     return row;
 };
+
+
 
 
 // Function to add products to the list
@@ -226,21 +262,33 @@ export const addProducts = () => {
 };
 
 
-
 // Function to create the expanded product details row
 const createProductDetailsRow = (product) => {
     const detailsRow = document.createElement("tr");
     detailsRow.classList.add("product-details");
     detailsRow.style.display = "none"; // Initially Hidden
+
+    // Placeholder image URL (200x200 pixels)
+    const placeholderImage = "https://placehold.co/200x200";
+    
+    // Fallback video URL
+    const fallbackVideoUrl = "https://videos.pexels.com/video-files/8478578/8478578-sd_640_360_30fps.mp4";
+
     detailsRow.innerHTML = `
         <td colspan="6">
             <div class="product-expanded-content">
                 <div class="media-section">
                     <div class="media-preview">
-                        ${product.images.map(img => `<img src="${img}" alt="Product Image">`).join('')}
+                        ${product.images.map(img => `
+                            <img 
+                                src="${img}" 
+                                alt="Product Image"
+                                onerror="this.onerror=null;this.src='${placeholderImage}';" 
+                            >
+                        `).join('')}
                         <div class="video-container">
                             <video width="100%" controls>
-                                <source src="${product.video}" type="video/mp4">
+                                <source src="${product.video || fallbackVideoUrl}" type="video/mp4">
                                 Your browser does not support the video tag.
                             </video>
                         </div>
@@ -259,6 +307,7 @@ const createProductDetailsRow = (product) => {
     `;
     return detailsRow;
 };
+
 
 // Function to add event listener for toggling product details visibility
 const addToggleDetailsEvent = (row, detailsRow) => {

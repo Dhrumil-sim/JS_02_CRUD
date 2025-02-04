@@ -16,10 +16,10 @@ function initializePaginationSettings(state) {
 }
 
 // Function to render the search results
-export function renderSearchResults(searchQuery, searchResults) {
-    // Remove any existing category tables from the main page
+export function renderSearchResults(searchQuery, searchResults, shouldCreateTable = false) {
+    // Remove any existing category tables from the main page if shouldCreateTable is true
     const existingCategoryContainer = document.querySelector('.category-container');
-    if (existingCategoryContainer) {
+    if (existingCategoryContainer && shouldCreateTable) {
         existingCategoryContainer.remove();
     }
 
@@ -29,15 +29,31 @@ export function renderSearchResults(searchQuery, searchResults) {
         noResultsMessage.classList.add("no-results-message");
         noResultsMessage.innerText = `No results found for "${searchQuery}".`;
         document.body.appendChild(noResultsMessage);
+        
+        // If shouldCreateTable is false, just refresh the page instead of creating the table
+        if (!shouldCreateTable) {
+            setTimeout(() => {
+                window.location.reload(); // Refresh the page after 1 second
+            },0);
+        }
+        
         return;
     }
 
     // Create a new category name for search results
     const searchCategory = `${searchQuery} Results`;
 
-    // Create a table to display the search results
-    createSearchTable(searchCategory, searchResults);
+    // Create a table to display the search results if shouldCreateTable is true
+    if (shouldCreateTable) {
+        createSearchTable(searchCategory, searchResults);
+    } else {
+        // Refresh the page if shouldCreateTable is false
+        setTimeout(() => {
+            window.location.reload(); // Refresh the page after 1 second
+        }, 1000);
+    }
 }
+
 
 // Function to create a search table
 const createSearchTable = (category, products) => {

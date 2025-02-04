@@ -38,10 +38,11 @@ document.getElementById("price-range").addEventListener("change", (e) => {
         const [minPrice, maxPrice] = selectedRange.split("-").map(Number); // Parse the range into min and max
         const filteredProducts = getProductsByPriceRange(minPrice, maxPrice); // Get filtered products
         console.log("Filtered products:", filteredProducts); // Do something with the filtered products'
-        renderSearchResults(selectedRange,filteredProducts);
+        renderSearchResults(selectedRange,filteredProducts,true);
     }else 
     {
-        addProducts();
+        renderSearchResults('','',false);
+    
     }
 });
 
