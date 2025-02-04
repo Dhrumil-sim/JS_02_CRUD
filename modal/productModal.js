@@ -19,6 +19,14 @@ export const productModel = {
  */
 export const saveProduct = (productData) => {
     const products = getProducts(); // Get existing products from localStorage
+    const existingProduct = products.find(product => product.name === productData.name);
+    
+    if (existingProduct) {
+        // If the product exists, show an alert and return
+        alert('A product with this name already exists!');
+        return; // Exit the function without saving the new product
+    }
+    
 
     if (productData.id === null) {
         // Generate a new unique ID for the product
