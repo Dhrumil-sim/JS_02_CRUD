@@ -94,3 +94,20 @@ export const updateProduct = (productId, updatedData) => {
           }, 200);
     }
 };
+/**
+ * Function to get products based on category name or product name
+ * @param {string} query - The category name or product name to search for
+ * @returns {Array} - Array of products that match the query
+ */
+export const getProductsByCategoryOrName = (query) => {
+    // Retrieve all products from localStorage
+    const products = getProducts();
+
+    // Filter products based on the query (category or name)
+    const filteredProducts = products.filter(product => 
+        product.category.toLowerCase().includes(query.toLowerCase()) || 
+        product.name.toLowerCase().includes(query.toLowerCase())
+    );
+
+    return filteredProducts;
+};

@@ -1,3 +1,6 @@
+import { getProductsByCategoryOrName } from "../../modal/productModal.js";
+import {renderSearchResults } from "./searchResults.js";
+
 // Function to create the header
 export const createHeader = (products, updateTable) => {
     const header = document.createElement("div");
@@ -54,7 +57,18 @@ function debounce(func, wait) {
     };
 }
 
-// Function to handle searching of products (just log the search query)
 const handleSearch = (query) => {
     console.log("Search Query:", query); // Log only the search query
+    
+    // Get filtered products based on category or name
+    const filteredProducts = getProductsByCategoryOrName(query);
+    
+    // Check if there are any products to display
+    if (filteredProducts.length > 0) {
+        console.log(filteredProducts); // Log filtered products for debugging
+        // Here, you can modify addProductsForCategory to accept filtered products
+        renderSearchResults(query,filteredProducts);
+    } else {
+        console.log("No products found for the search query.");
+    }
 };
