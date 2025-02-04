@@ -153,9 +153,6 @@ function changePage(category, newPage) {
     }
 }
 
-// Log the result of calling changePage for 'Plant' category, page 2
-console.log(changePage('Plant', 2));
-
 // Function to add products to a category-specific table
 const addProductsForCategory = (category, products) => {
     const productList = document.getElementById(`product-list-${category}`);

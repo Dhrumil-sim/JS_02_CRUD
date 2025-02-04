@@ -1,4 +1,5 @@
-import { getProductsByCategoryOrName } from "../../modal/productModal.js";
+import { getProducts, getProductsByCategoryOrName } from "../../modal/productModal.js";
+import { priceRangeRander, rangeThePrice } from "./priceRange.js";
 import {renderSearchResults } from "./searchResults.js";
 
 // Function to create the header
@@ -19,18 +20,14 @@ export const createHeader = (products, updateTable) => {
                     <option value="high-to-low">High to Low</option>
                 </select>
             </div>
-            <div class="dropdown">
-                <span class="range-icon">💰</span>
-                <select id="price-range">
-                    <option value="none">Price Range</option>
-                    <option value="0-50">0 - 50</option>
-                    <option value="51-100">51 - 100</option>
-                    <option value="101-200">101 - 200</option>
-                    <option value="200+">200+</option>
-                </select>
-            </div>
         </div>
     `;
+
+    const prices = rangeThePrice();
+    const priceRangeContainer = priceRangeRander(prices);
+
+    header.querySelector(".sorting-filtering").appendChild(priceRangeContainer);
+
     document.body.appendChild(header);
 
     // Get the search input element
@@ -46,6 +43,20 @@ export const createHeader = (products, updateTable) => {
     searchInput.addEventListener('input', debouncedSearch);
 
     // Add other event listeners for price sort and range filtering as before
+
+    const sortInput = document.getElementById('price-sort');
+
+    sortInput.addEventListener('change',(event)=>{
+        
+        const sortText = ""+event.target.value;
+       
+        const alldata = getProducts();
+
+        handlePriceSort(sortText,alldata);
+        
+    })
+
+
 };
 
 // Debounce function to limit the rate at which a function can fire
@@ -72,3 +83,21 @@ const handleSearch = (query) => {
         console.log("No products found for the search query.");
     }
 };
+
+function handlePriceSort(sortOption,products)
+{
+    let sortedProducts;
+
+    if(sortOption == 'low-to-high'){
+        sortedProducts = [...products].sort((a,b)=>a.price - b.price);
+    }
+    else if(sortOption=='high-to-low')
+    {
+        sortedProducts = [...products].sort((a,b)=>b.price-a.price);
+    }
+    else 
+    {
+        sortedProducts = products;
+    }
+    renderSearchResults("Sorted by price",sortedProducts);
+}

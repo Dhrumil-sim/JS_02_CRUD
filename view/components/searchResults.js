@@ -4,7 +4,7 @@ import { createProductModal } from "../addProductForm.js";
 // State structure for managing pagination and search results
 let searchState = {
     'paginationSettings': {},
-    'maxRowsPerPage': 5  // Maximum rows per page for search results
+    'maxRowsPerPage': 20 // Maximum rows per page for search results
 };
 
 // Initialize pagination for the search results
@@ -132,7 +132,7 @@ const createProductRow = (product, index) => {
     const row = document.createElement("tr");
     row.classList.add("product-row");
     row.innerHTML = `
-        <td>${index}</td> <!-- Index used for Sr No. -->
+        <td>${product.id}</td> <!-- Index used for Sr No. -->
         <td><img src="${product.logo}" alt="Product Logo" class="product-img"></td>
         <td>${product.name}</td>
         <td>${product.description}</td>
