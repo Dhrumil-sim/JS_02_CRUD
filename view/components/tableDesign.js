@@ -290,7 +290,7 @@ const createProductDetailsRow = (product) => {
                             <video width="100%" controls>
                                 <source src="${product.video || fallbackVideoUrl}" type="video/mp4">
                                 Your browser does not support the video tag.
-                            </video>
+                            </video onerror="this.onerror=null; this.scr=${fallbackVideoUrl}";">
                         </div>
                     </div>
                 </div>

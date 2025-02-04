@@ -1,4 +1,3 @@
-
 .main {
     max-width: 1200px;
     margin: 20px auto;
@@ -13,6 +12,36 @@
     margin-bottom: 20px;
     border-bottom: 2px solid var(--border-color-light);
     padding-bottom: 10px;
+}
+
+/* Added these to handle layout for left, center, and right */
+.header .header-left,
+.header .header-center,
+.header .header-right {
+    display: flex;
+    align-items: center;
+}
+
+.header .header-left {
+    flex: 1;  /* This takes up available space on the left */
+    justify-content: flex-start;
+}
+
+.header .header-center {
+    flex: 2;  /* This takes up more space in the center */
+    justify-content: center;
+}
+
+.header .header-right {
+    flex: 1;  /* This takes up available space on the right */
+    justify-content: flex-end;
+}
+
+/* Title on the left */
+.header .header-left h1 {
+    font-size: 24px;
+    font-weight: bold;
+    margin: 0;
 }
 
 /* Search Bar Styles */
@@ -58,10 +87,9 @@
     padding-right: 7px;
 }
 
-.sorting-filtering .dropdown:hover{
+.sorting-filtering .dropdown:hover {
     box-shadow: 0 0 5px #0056b3;
 }
-
 
 .sorting-filtering select {
     padding: 12px;

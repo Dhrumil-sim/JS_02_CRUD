@@ -7,11 +7,17 @@ export const createHeader = (products, updateTable) => {
     const header = document.createElement("div");
     header.classList.add("header");
     header.innerHTML = `
+     <div class="header-left">
+        <h1>Welcome, to PMS</h1>
+    </div>
+         <div class="header-center">
         <div class="search-bar">
             <input type="text" placeholder="Search Products" id="search-input">
             <span class="search-icon">🔍</span>
         </div>
+    </div>
 
+         <div class="header-right">
         <div class="sorting-filtering">
             <div class="dropdown">
                 <span class="sort-icon">⬇</span>
@@ -22,6 +28,7 @@ export const createHeader = (products, updateTable) => {
                 </select>
             </div>
         </div>
+    </div>
     `;
 
     const prices = rangeThePrice();
@@ -79,8 +86,9 @@ const handleSearch = (query) => {
     if (filteredProducts.length > 0) {
         console.log(filteredProducts); // Log filtered products for debugging
         // Here, you can modify addProductsForCategory to accept filtered products
-        renderSearchResults(query,filteredProducts);
+        renderSearchResults(query,filteredProducts,true);
     } else {
+        renderSearchResults(query,filteredProducts,false);
         console.log("No products found for the search query.");
     }
 };
