@@ -36,12 +36,12 @@ td:hover {
 }
 
 tr {
-    border-bottom: 1px solid #ccc;
+    border-bottom: 1px solid var(--border-color-light);
 }
 
 th {
-    background-color: whitesmoke;
-    color: var(--button-text-light);
+    background-color: var(--background-color-light);
+    color: var(--text-color-light);
     font-weight: bold;
     border-bottom: 2px solid var(--border-color-light);
     padding-top: 16px;
@@ -67,7 +67,7 @@ td {
 
 .product-details {
     display: none;
-    background-color: #f8f9fa;
+    background-color: var(--background-color-light);
 }
 
 .product-row.active + .product-details {
@@ -84,7 +84,7 @@ td {
 .expanded-card {
     display: flex;
     flex-direction: column;
-    background-color: #fff;
+    background-color: var(--card-bg-light);
     border-radius: 12px;
     padding: 15px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
@@ -116,7 +116,7 @@ td {
 .video-container {
     flex-shrink: 0;
     width: 300px;
-    height: 200px;
+    height: auto;
     background: #f5f5f5;
     display: flex;
     align-items: center;
@@ -134,7 +134,7 @@ td {
 
 .features-section {
     flex: 1.5;
-    background-color: #fff;
+    background-color: var(--card-bg-light);
     padding: 20px;
     border-radius: 8px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
@@ -169,7 +169,7 @@ td {
 
 .scroll-btn {
     padding: 10px;
-    background-color: #007bff;
+    background-color: var(--primary-color-light);
     color: white;
     border: none;
     cursor: pointer;
@@ -178,7 +178,7 @@ td {
 }
 
 .scroll-btn:hover {
-    background-color: #0056b3;
+    background-color: var(--primary-color-dark);
 }
 
 .btn {
@@ -192,21 +192,89 @@ td {
 }
 
 .edit-btn {
-    background-color: #007bff;
+    background-color: var(--primary-color-light);
     color: #fff;
 }
 
 .edit-btn:hover {
-    background-color: #0056b3;
+    background-color: var(--primary-color-dark);
 }
 
 .delete-btn {
-    background-color: #dc3545;
+    background-color: var(--secondary-color-light);
     color: #fff;
 }
 
 .delete-btn:hover {
-    background-color: #c82333;
+    background-color: var(--secondary-color-dark);
+}
+
+/* Dark Mode Adjustments */
+[data-theme="dark"] .table {
+    background-color: var(--card-bg-dark);
+}
+
+[data-theme="dark"] th {
+    background-color: var(--background-color-dark);
+    color: var(--text-color-dark);
+    border-bottom: 2px solid var(--border-color-dark);
+}
+
+[data-theme="dark"] td {
+    background-color: var(--card-bg-dark);
+    border-bottom: 1px solid var(--border-color-dark);
+}
+
+[data-theme="dark"] .product-details {
+    background-color: var(--background-color-dark);
+}
+
+[data-theme="dark"] .product-expanded-content {
+    background-color: var(--card-bg-dark);
+}
+
+[data-theme="dark"] .expanded-card {
+    background-color: var(--card-bg-dark);
+}
+
+[data-theme="dark"] .features-section {
+    background-color: var(--card-bg-dark);
+}
+
+[data-theme="dark"] .feature-card {
+    background-color: var(--card-bg-dark);
+}
+
+[data-theme="dark"] .scroll-btn {
+    background-color: var(--primary-color-dark);
+    color: white;
+}
+
+[data-theme="dark"] .scroll-btn:hover {
+    background-color: var(--primary-color-light);
+}
+
+[data-theme="dark"] .btn {
+    background-color: var(--primary-color-dark);
+    color: white;
+}
+
+[data-theme="dark"] .edit-btn {
+    background-color: var(--primary-color-dark);
+    color: white;
+}
+
+[data-theme="dark"] .edit-btn:hover {
+    background-color: var(--primary-color-light);
+}
+
+[data-theme="dark"] .delete-btn {
+    background-color: var(--secondary-color-dark);
+    color: white;
+}
+
+[data-theme="dark"] .delete-btn:hover {
+    background-color: var(--secondary-color-light);
 }
 
 @media (max-width: 768px) {

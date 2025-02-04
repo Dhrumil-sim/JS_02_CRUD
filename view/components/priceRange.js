@@ -48,7 +48,7 @@ export const priceRangeRander = (rangesObject) => {
         }).join("");  // Join all options together as a string
 
         priceRangeContainer.innerHTML = `
-            <span class="range-icon">💰</span>
+          
             <select id="price-range">
                 <option value="none">Price Range</option>
                 ${rangeOptions}  <!-- Insert dynamic range options -->

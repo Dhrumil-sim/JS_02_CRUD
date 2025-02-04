@@ -1,3 +1,35 @@
+:root {
+    --background-color-light: #ffffff;
+    --border-color-light: #e0e0e0;
+    --link-color-light: #333333;
+    --primary-color-light: #007bff;
+}
+
+/* Dark Mode */
+[data-theme="dark"] {
+    --background-color-dark: #2e2e2e;
+    --border-color-dark: #444444;
+    --link-color-dark: #dcdcdc;
+    --primary-color-light: #ff7f50; /* For hover effects */
+}
+/* Dark Mode Styles */
+body[data-theme="dark"] .bottom-menu {
+    background-color: var(--background-color-dark);
+    border-color: var(--border-color-dark);
+}
+
+body[data-theme="dark"] .menu-items a {
+    color: var(--link-color-dark);
+}
+
+body[data-theme="dark"] .menu-items a:hover {
+    color: var(--primary-color-light);
+}
+
+body[data-theme="dark"] .menu-items a:hover i {
+    color: var(--primary-color-light);
+}
+
 .bottom-menu {
     display: flex;
     justify-content: space-between;
@@ -10,8 +42,8 @@
     max-width: 90%;
     padding: 1rem;
     border-radius: 8px;
-    background-color: var(--background-color-light);
-    border: 2px solid var(--border-color-light);
+    background-color: var(--background-color-light); /* Default light mode background */
+    border: 2px solid var(--border-color-light); /* Default light mode border */
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.20);
     transition: background-color 0.3s, border-color 0.3s;
 }
@@ -25,11 +57,11 @@
     display: flex;
     align-items: center;
     text-decoration: none;
-    color: #333;
+    color: #333; /* Default light mode text color */
     font-size: 1rem;
     transition: color 0.3s;
     position: relative;
-    overflow: hidden; /* Ensure text stays inside the container */
+    overflow: hidden;
     padding: 5px 10px;
 }
 
@@ -45,7 +77,6 @@
     position: absolute;
     bottom: -20px;
     opacity: 0;
-   
     transition: opacity 0.3s, transform 0.3s;
 }
 
@@ -56,30 +87,42 @@
 }
 
 .menu-items a:hover i {
-
     color: #B19CD7;
 }
 
+/* Dark Mode Styles */
 [data-theme="dark"] .bottom-menu {
-    background-color: var(--background-color-dark);
-    border-color: var(--border-color-dark);
+    background-color: var(--background-color-dark); /* Dark mode background */
+    border-color: var(--border-color-dark); /* Dark mode border */
 }
 
-.bottom-menu a {
-    color: var(--link-color-light);
-    text-decoration: none;
-    margin: 0 0.5rem;
-    transition: color 0.3s;
+[data-theme="dark"] .menu-items a {
+    color: var(--link-color-dark); /* Dark mode link color */
+}
+
+[data-theme="dark"] .menu-items a:hover {
+    color: var(--primary-color-light); /* Dark mode hover link color */
+}
+
+[data-theme="dark"] .menu-items a:hover i {
+    color: var(--primary-color-light); /* Dark mode icon hover color */
+}
+
+/* Light mode default link hover color */
+.bottom-menu a:hover {
+    color: var(--primary-color-light); /* Light mode hover color */
 }
 
 [data-theme="dark"] .bottom-menu a {
-    color: var(--link-color-dark);
+    color: var(--link-color-dark); /* Dark mode link color */
 }
 
-.bottom-menu a:hover {
-    color: var(--primary-color-light);
+/* Additional Dark Mode Adjustments (Optional) */
+[data-theme="dark"] .bottom-menu {
+    box-shadow: 0 4px 8px rgba(255, 255, 255, 0.1); /* Lighter shadow in dark mode */
 }
 
+/* Responsive Layouts */
 @media (max-width: 768px) {
     .bottom-menu {
         flex-direction: column;

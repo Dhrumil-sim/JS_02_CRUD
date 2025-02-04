@@ -1,20 +1,21 @@
+/* Main Container */
 .main {
     max-width: 1200px;
     margin: 20px auto;
     padding: 20px;
 }
 
-/* Header styles */
+/* Header Styles */
 .header {
     display: flex;
     justify-content: space-between;
     align-items: center;
     margin-bottom: 20px;
-    border-bottom: 2px solid var(--border-color-light);
+    border-bottom: 2px solid var(--border-color-light); /* Default light mode border */
     padding-bottom: 10px;
 }
 
-/* Added these to handle layout for left, center, and right */
+/* Header Layout for Left, Center, Right */
 .header .header-left,
 .header .header-center,
 .header .header-right {
@@ -23,21 +24,21 @@
 }
 
 .header .header-left {
-    flex: 1;  /* This takes up available space on the left */
+    flex: 1;
     justify-content: flex-start;
 }
 
 .header .header-center {
-    flex: 2;  /* This takes up more space in the center */
+    flex: 2;
     justify-content: center;
 }
 
 .header .header-right {
-    flex: 1;  /* This takes up available space on the right */
+    flex: 1;
     justify-content: flex-end;
 }
 
-/* Title on the left */
+/* Title on the Left */
 .header .header-left h1 {
     font-size: 24px;
     font-weight: bold;
@@ -51,17 +52,17 @@
 }
 
 .search-bar input {
-    padding: 12px 12px 12px 45px; /* Added padding to make space for the icon */
+    padding: 12px 12px 12px 45px;
     font-size: 14px;
     width: 100%;
     border-radius: 8px;
-    border: 1px solid black;
+    border: 1px solid var(--border-color-light); /* Default light mode border */
     outline: none;
 }
 
 /* Highlight when input is active (focused) */
 .search-bar input:focus {
-    box-shadow: 0 0 5px #0056b3; /* Add a subtle glow effect */
+    box-shadow: 0 0 5px #0056b3;
 }
 
 /* Search Bar Icon */
@@ -71,7 +72,7 @@
     top: 50%;
     transform: translateY(-50%);
     font-size: 18px;
-    color: var(--border-color-light);
+    color: var(--border-color-light); /* Default light mode icon color */
 }
 
 /* Sorting and Filtering Dropdown Styles */
@@ -82,9 +83,7 @@
 
 .sorting-filtering .dropdown {
     position: relative;
-    border: 1px solid black;
     border-radius: 7px;
-    padding-right: 7px;
 }
 
 .sorting-filtering .dropdown:hover {
@@ -95,15 +94,15 @@
     padding: 12px;
     font-size: 14px;
     border-radius: 8px;
-    border: 1px solid var(--border-color-light);
-    background-color: var(--background-color-light);
+    border: 1px solid var(--border-color-light); /* Default light mode border */
+    background-color: var(--background-color-light); /* Light mode background */
     outline: none;
     cursor: pointer;
     transition: border 0.3s ease;
 }
 
 .sorting-filtering select:hover {
-    border: 1px solid var(--primary-color-light);
+    border: 1px solid var(--primary-color-light); /* Default light mode hover */
 }
 
 /* Icons for Dropdowns */
@@ -114,9 +113,55 @@
     top: 50%;
     transform: translateY(-50%);
     font-size: 18px;
-    color: var(--border-color-light);
+    color: var(--border-color-light); /* Default light mode icon color */
 }
 
-.sorting-filtering .dropdown select {
-    padding-left: 30px; /* Added padding to accommodate the icon */
+/* Adjustments for Dark Mode */
+
+/* Dark Mode Header */
+[data-theme="dark"] .header {
+    border-bottom: 2px solid var(--border-color-dark); /* Dark mode border */
+}
+
+/* Dark Mode Search Bar */
+[data-theme="dark"] .search-bar input {
+    border: 1px solid var(--border-color-dark); /* Dark mode input border */
+    background-color: var(--background-color-dark); /* Dark mode input background */
+    color: var(--text-color-dark); /* Dark mode input text */
+}
+
+/* Dark Mode Search Bar Icon */
+[data-theme="dark"] .search-bar .search-icon {
+    color: var(--border-color-dark); /* Dark mode icon color */
+}
+
+/* Dark Mode Sorting and Filtering Dropdown */
+[data-theme="dark"] .sorting-filtering .dropdown {
+    border: 1px solid var(--border-color-dark); /* Dark mode dropdown border */
+}
+
+[data-theme="dark"] .sorting-filtering select {
+    border: 1px solid var(--border-color-dark); /* Dark mode select border */
+    background-color: var(--background-color-dark); /* Dark mode select background */
+    color: var(--text-color-dark); /* Dark mode select text */
+}
+
+/* Dark Mode Dropdown Icon Color */
+[data-theme="dark"] .sorting-filtering .sort-icon,
+[data-theme="dark"] .sorting-filtering .range-icon {
+    color: var(--border-color-dark); /* Dark mode icon color */
+}
+
+/* Dark Mode Transitions */
+[data-theme="dark"] .search-bar input:focus {
+    box-shadow: 0 0 5px var(--primary-color-dark); /* Dark mode focused input glow */
+}
+
+/* Dark Mode Styling for Links, Buttons, etc. */
+[data-theme="dark"] .header .header-left h1 {
+    color: var(--text-color-dark); /* Dark mode header text color */
+}
+
+[data-theme="dark"] .sorting-filtering select:hover {
+    border: 1px solid var(--primary-color-dark); /* Dark mode select hover */
 }

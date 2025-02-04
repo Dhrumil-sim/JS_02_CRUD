@@ -129,3 +129,8 @@
         padding: 20px;
     }
 }
+[data-theme="dark"] .modal-content h2 ,label{
+
+    color: black;
+
+}

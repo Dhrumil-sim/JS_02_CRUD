@@ -20,7 +20,7 @@ export const createHeader = (products, updateTable) => {
          <div class="header-right">
         <div class="sorting-filtering">
             <div class="dropdown">
-                <span class="sort-icon">⬇</span>
+              
                 <select id="price-sort">
                     <option value="none">Sort by Price</option>
                     <option value="low-to-high">Low to High</option>

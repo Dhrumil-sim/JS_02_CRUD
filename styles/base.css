@@ -1,4 +1,5 @@
-root {
+/* Default Light Mode Variables */
+:root {
     --background-color-light: #ffffff;
     --text-color-light: #333333;
     --primary-color-light: #6C63FF; /* Soft purple */
@@ -9,6 +10,7 @@ root {
     --button-text-light: #ffffff;
     --card-bg-light: #F8F9FA;
     --link-color-light: #6C63FF; /* Soft purple */
+    
     --background-color-dark: #121212;
     --text-color-dark: #E0E0E0;
     --primary-color-dark: #1E90FF;
@@ -19,44 +21,98 @@ root {
     --button-text-dark: #ffffff;
     --card-bg-dark: #2B2B2B;
     --link-color-dark: #1E90FF;
+
     --menu-bg: rgba(255, 255, 255, 0.9);
     --menu-border: rgba(0, 0, 0, 0.1);
     --menu-hover: #B19CD7;
     --menu-shadow: rgba(0, 0, 0, 0.15);
     --text-color: #333;
 }
-/* Basic scrollbar styles */
-::-webkit-scrollbar {
-    width: 8px;  /* Set the width of the scrollbar */
-    height: 8px; /* Set the height of the scrollbar for horizontal scroll */
-}
 
-/* Track (background of the scrollbar) */
-::-webkit-scrollbar-track {
-    background: transparent; /* Make the track transparent */
-    border-radius: 4px; /* Optional: rounded corners */
-}
-
-/* Handle (the draggable part of the scrollbar) */
-::-webkit-scrollbar-thumb {
-    background: rgba(0, 0, 0, 0.2); /* Set the color of the handle */
-    border-radius: 4px; /* Optional: rounded corners */
-    border: 2px solid transparent; /* Optional: add a slight border */
-    background-clip: content-box; /* Optional: keeps the background inside the thumb */
-}
-
-/* Handle hover state */
-::-webkit-scrollbar-thumb:hover {
-    background: rgba(0, 0, 0, 0.5); /* Darken the thumb color on hover */
-}
-
-/* Handle active state */
-::-webkit-scrollbar-thumb:active {
-    background: rgba(0, 0, 0, 0.7); /* Darken the thumb when actively scrolling */
-}
+/* Body Styling */
 body {
     font-family: 'Arial', sans-serif;
     background-color: var(--background-color-light);
     color: var(--text-color-light);
     transition: background-color 0.3s, color 0.3s;
 }
+
+/* Dark Mode Styles */
+[data-theme="dark"] {
+    --background-color-light: var(--background-color-dark);
+    --text-color-light: var(--text-color-dark);
+    --primary-color-light: var(--primary-color-dark);
+    --secondary-color-light: var(--secondary-color-dark);
+    --border-color-light: var(--border-color-dark);
+    --hover-color-light: var(--hover-color-dark);
+    --button-bg-light: var(--button-bg-dark);
+    --button-text-light: var(--button-text-dark);
+    --card-bg-light: var(--card-bg-dark);
+    --link-color-light: var(--link-color-dark);
+    
+    background-color: var(--background-color-dark);
+    color: var(--text-color-dark);
+}
+
+/* Scrollbar Styling */
+::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: transparent;
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb {
+    background: rgba(0, 0, 0, 0.2);
+    border-radius: 4px;
+    border: 2px solid transparent;
+    background-clip: content-box;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: rgba(0, 0, 0, 0.5);
+}
+
+::-webkit-scrollbar-thumb:active {
+    background: rgba(0, 0, 0, 0.7);
+}
+
+/* Example of a Button (light/dark mode based on current theme) */
+button {
+    background-color: var(--button-bg-light);
+    color: var(--button-text-light);
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+button:hover {
+    background-color: var(--primary-color-light);
+}
+
+/* Example of Card (light/dark mode based on current theme) */
+.card {
+    background-color: var(--card-bg-light);
+    color: var(--text-color-light);
+    border: 1px solid var(--border-color-light);
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.card:hover {
+    background-color: var(--hover-color-light);
+}
+
+/* Light Mode Defaults */
+body {
+    background-color: var(--background-color-light);
+    color: var(--text-color-light);
+}
+

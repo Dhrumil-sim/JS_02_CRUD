@@ -6,47 +6,48 @@
     margin-top: 10px;
 }
 
-.pagination-controls:last-of-type{
+.pagination-controls:last-of-type {
     margin-bottom: 120px;
 }
 
+/* Pagination Button Styles */
 .pagination-controls button {
     padding: 8px 16px;
     margin: 0 5px;
     background-color: transparent;
-    color: #333;
-    border: 1px solid #ddd;
+    color: var(--text-color-light); /* Default light mode text color */
+    border: 1px solid var(--border-color-light); /* Default light mode border */
     border-radius: 4px;
     font-size: 14px;
     cursor: pointer;
     transition: all 0.3s ease;
 }
 
-/* Hover effect */
+/* Hover effect for buttons */
 .pagination-controls button:hover {
-    background-color: #f5f5f5;
-    border-color: #999;
+    background-color: var(--hover-color-light); /* Default light mode hover color */
+    border-color: var(--border-color-light); /* Light mode hover border */
 }
 
 /* Disabled Button */
 .pagination-controls button:disabled {
-    background-color: #f0f0f0;
-    color: #ccc;
-    border-color: #ddd;
+    background-color: #ccc; /* Light mode disabled background */
+    color: black; /* Light mode disabled text color */
+    border-color: var(--border-color-light); /* Light mode disabled border */
     cursor: not-allowed;
 }
 
 /* Active Page */
 .pagination-controls button.active {
-    background-color: #007bff;
+    background-color: var(--primary-color-light); /* Light mode active button */
     color: white;
-    border-color: #007bff;
+    border-color: var(--primary-color-light); /* Light mode active button border */
 }
 
 /* Hover effect for active page */
 .pagination-controls button.active:hover {
-    background-color: #0056b3;
-    border-color: #0056b3;
+    background-color: var(--primary-color-dark); /* Darker active button on hover */
+    border-color: var(--primary-color-dark); /* Darker active button on hover */
 }
 
 /* First and last buttons (Previous/Next) */
@@ -74,4 +75,51 @@
 .pagination-controls button:last-child:not(.active) {
     border-radius: 4px;
     width: 100px;
+}
+
+/* Dark Mode Adjustments */
+[data-theme="dark"] .pagination-controls button {
+    color: var(--text-color-dark); /* Dark mode button text color */
+    border: 1px solid var(--border-color-dark); /* Dark mode border */
+}
+
+/* Dark Mode Hover Effect */
+[data-theme="dark"] .pagination-controls button:hover {
+    background-color: var(--hover-color-dark); /* Dark mode hover color */
+    border-color: var(--border-color-dark); /* Dark mode hover border */
+}
+
+/* Dark Mode Disabled Button */
+[data-theme="dark"] .pagination-controls button:disabled {
+    background-color: var(--button-bg-dark); /* Dark mode disabled background */
+    color: var(--button-text-dark); /* Dark mode disabled text color */
+    border-color: var(--border-color-dark); /* Dark mode disabled border */
+}
+
+/* Dark Mode Active Page */
+[data-theme="dark"] .pagination-controls button.active {
+    background-color: var(--primary-color-dark); /* Dark mode active button */
+    color: white;
+    border-color: var(--primary-color-dark); /* Dark mode active button border */
+}
+
+/* Dark Mode Active Page Hover Effect */
+[data-theme="dark"] .pagination-controls button.active:hover {
+    background-color: var(--primary-color-light); /* Dark mode active button hover */
+    border-color: var(--primary-color-light); /* Dark mode active button hover border */
+}
+
+/* Dark Mode Compact Page Number Buttons */
+[data-theme="dark"] .pagination-controls button:not(.active) {
+    color: var(--text-color-dark); /* Dark mode text color for non-active buttons */
+    border: 1px solid var(--border-color-dark); /* Dark mode border for non-active buttons */
+}
+
+/* Dark Mode First and Last Buttons */
+[data-theme="dark"] .pagination-controls button:first-child:not(.active),
+[data-theme="dark"] .pagination-controls button:last-child:not(.active) {
+    border-radius: 4px;
+    width: 100px;
+    color: var(--text-color-dark); /* Dark mode text color for first and last buttons */
+    border: 1px solid var(--border-color-dark); /* Dark mode border for first and last buttons */
 }
