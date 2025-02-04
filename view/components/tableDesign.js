@@ -46,6 +46,7 @@ const createTable = (category, products) => {
                     <th>Product Name</th>
                     <th>Product Desc</th>
                     <th>Product Price</th>
+                    <th>Create/Update time</th>
                     <th>Action</th>
                 </tr>
             </thead>
@@ -219,6 +220,10 @@ const createProductRow = (product, index) => {
     const priceCell = document.createElement("td");
     priceCell.textContent = product.price;
 
+    const createUpdateTime = document.createElement("td");
+     let time = new Date(product.createdAt?product.createdAt:product.modifiedAt);
+    createUpdateTime.textContent = time.toLocaleString();
+
     const actionCell = document.createElement("td");
     actionCell.innerHTML = `
         <button class="btn edit-btn" data-product-id="${product.id}">Edit</button>
@@ -232,6 +237,7 @@ const createProductRow = (product, index) => {
     row.appendChild(nameCell);
     row.appendChild(descriptionCell);
     row.appendChild(priceCell);
+    row.appendChild(createUpdateTime);
     row.appendChild(actionCell);
 
     return row;
@@ -275,7 +281,7 @@ const createProductDetailsRow = (product) => {
     const fallbackVideoUrl = "https://videos.pexels.com/video-files/8478578/8478578-sd_640_360_30fps.mp4";
 
     detailsRow.innerHTML = `
-        <td colspan="6">
+        <td colspan="7">
             <div class="product-expanded-content">
                 <div class="media-section">
                     <div class="media-preview">
