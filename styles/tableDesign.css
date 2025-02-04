@@ -235,10 +235,12 @@ td {
 
 [data-theme="dark"] .expanded-card {
     background-color: var(--card-bg-dark);
+    border: 1px solid #ccc;
 }
 
 [data-theme="dark"] .features-section {
     background-color: var(--card-bg-dark);
+    border: 1px solid #ccc;
 }
 
 [data-theme="dark"] .feature-card {
@@ -276,6 +278,33 @@ td {
 [data-theme="dark"] .delete-btn:hover {
     background-color: var(--secondary-color-light);
 }
+[data-theme="dark"]::-webkit-scrollbar {
+    width: 8px;
+    height: 8px; /* For horizontal scrollbar */
+}
+
+/* Track (background of the scrollbar) */
+[data-theme="dark"]::-webkit-scrollbar-track {
+    background: #2b2b2b; /* Dark background for the scrollbar track */
+    border-radius: 4px;
+}
+
+/* Handle (the draggable part of the scrollbar) */
+[data-theme="dark"]::-webkit-scrollbar-thumb {
+    background: #555; /* Darker thumb for better contrast */
+    border-radius: 4px;
+}
+
+/* Handle hover state */
+[data-theme="dark"]::-webkit-scrollbar-thumb:hover {
+    background: #888; /* Lighter thumb on hover */
+}
+
+/* Handle active state */
+[data-theme="dark"]::-webkit-scrollbar-thumb:active {
+    background: #aaa; /* Lighter thumb when actively scrolling */
+}
+
 
 @media (max-width: 768px) {
     .header {
