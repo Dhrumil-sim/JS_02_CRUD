@@ -44,7 +44,7 @@ export const priceRangeRander = (rangesObject) => {
     // Ensure the passed data has the 'ranges' property that is an array
     if (Array.isArray(rangesObject.ranges)) {
         let rangeOptions = rangesObject.ranges.map(range => {
-            return `<option value="${range.min}-${range.max}">${range.label}</option>`;
+            return `<option value="${Math.floor(range.min)}-${Math.floor(range.max)}">${range.label}</option>`;
         }).join("");  // Join all options together as a string
 
         priceRangeContainer.innerHTML = `
