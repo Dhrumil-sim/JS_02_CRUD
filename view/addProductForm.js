@@ -68,8 +68,8 @@ const generateModalContent = (productId) => {
                 <input type="text" id="product-images" pattern="^((https?|ftp):\/\/[^\s/$.?#].[^\s]*)(\s*,\s*(https?|ftp):\/\/[^\s/$.?#].[^\s]*)*$" title="Enter valid URLs separated by commas (e.g., http://example.com/image1.jpg, http://example.com/image2.jpg)">
                 <span class="error" id="image-error"></span>
 
-                <label>Product Video (URL):</label>
-                <input type="url" id="product-video" pattern="https?://.+\.(mp4|webm|ogg)" title="Enter a valid video URL (e.g., http://example.com/video.mp4)">
+                <label>Product Video (URL) , Youtube URL:</label>
+                <input type="url" id="product-video" pattern="https?://.+\." title="Enter a valid video URL (e.g., http://example.com/video.mp4)">
                 <span class="error" id="video-error"></span>
 
                 <label>Features (comma-separated):</label>

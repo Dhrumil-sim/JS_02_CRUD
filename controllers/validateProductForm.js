@@ -38,10 +38,7 @@ export const validateProductForm = () => {
         valid = false;
     }
 
-    if (video && !/^https?:\/\/.+\.(mp4|webm|ogg)$/.test(video)) {
-        showError("video-error", "Enter a valid video URL (mp4, webm, ogg).");
-        valid = false;
-    }
+  
 
     if (!features) {
         showError("feature-error", "Enter valid comma-separated features (e.g., Durable, Affordable).");

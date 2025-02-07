@@ -280,6 +280,44 @@ const createProductDetailsRow = (product) => {
     // Fallback video URL
     const fallbackVideoUrl = "https://videos.pexels.com/video-files/8478578/8478578-sd_640_360_30fps.mp4";
 
+    const productVideo = ""+product.video;
+
+    
+
+let videoContent = "";
+
+if (productVideo.includes("https://www.youtube.com/embed/")) {
+
+    console.log("Yes its youtube video");
+    // Extract the video ID from the shortened YouTube URL
+
+
+    // Embed the YouTube video using the extracted video ID
+    videoContent = `
+        <div class="video-container">
+            <iframe width="100%" height="315" 
+                src="${productVideo}" 
+                frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" 
+                allowfullscreen>
+            </iframe>
+        </div>
+    `;
+    console.log(videoContent);
+}
+
+
+    else 
+    {
+        videoContent = `
+            <div class="video-container">
+                <video width="100%" controls>
+                    <source src="${product.video || fallbackVideoUrl}" type="video/mp4">
+                    Your browser does not support the video tag.
+                </video>
+            </div>
+        `;
+    }
+
     detailsRow.innerHTML = `
         <td colspan="7">
             <div class="product-expanded-content">
@@ -292,12 +330,7 @@ const createProductDetailsRow = (product) => {
                                 onerror="this.onerror=null;this.src='${placeholderImage}';" 
                             >
                         `).join('')}
-                        <div class="video-container">
-                            <video width="100%" controls>
-                                <source src="${product.video || fallbackVideoUrl}" type="video/mp4">
-                                Your browser does not support the video tag.
-                            </video onerror="this.onerror=null; this.scr=${fallbackVideoUrl}";">
-                        </div>
+                        ${videoContent}
                     </div>
                 </div>
                 <div class="features-section">
