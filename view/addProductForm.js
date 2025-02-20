@@ -11,7 +11,7 @@ export const createProductModal = (productId = null) => {
 
     // Append the modal to the body
     document.body.appendChild(modal);
-
+    
     // Show the modal
     modal.style.display = "block";
 
